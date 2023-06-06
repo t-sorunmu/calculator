@@ -9,7 +9,15 @@ const eight = document.getElementById("8");
 const nine = document.getElementById("9");
 
 const calcNumbers = [one, two, three, four, five, six, seven, eight, nine];
+
 const display = document.getElementById("number-display");
+
+const addButton = document.getElementById("add");
+const subtractButton = document.getElementById("subtract");
+const multiplyButton = document.getElementById("multiply");
+const divideButton = document.getElementById("divide");
+const clear = document.getElementById("clear");
+
 let displayNumber = 0;
 
 for (num of calcNumbers) {
@@ -21,12 +29,17 @@ for (num of calcNumbers) {
         } else {
             displayNumber = parseInt(displayNumber.toString() + value);
         }
-        updateDisplay(displayNumber);
+        updateDisplay();
     });
 }
 
-function updateDisplay(newNumber) {
-    display.innerHTML = newNumber;
+clear.addEventListener('click', () => {
+    displayNumber = 0;
+    updateDisplay();
+});
+
+function updateDisplay() {
+    display.innerHTML = displayNumber;
 }
 
 function add(a, b) {
