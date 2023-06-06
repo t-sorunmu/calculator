@@ -16,6 +16,9 @@ const addButton = document.getElementById("add");
 const subtractButton = document.getElementById("subtract");
 const multiplyButton = document.getElementById("multiply");
 const divideButton = document.getElementById("divide");
+
+const operators = [addButton, subtractButton, multiplyButton, divideButton]
+
 const clear = document.getElementById("clear");
 
 let displayNumber = 0;
@@ -37,6 +40,10 @@ clear.addEventListener('click', () => {
     displayNumber = 0;
     updateDisplay();
 });
+
+for (op of operators) {
+    operand1 = displayNumber;
+}
 
 function updateDisplay() {
     display.innerHTML = displayNumber;
