@@ -4,3 +4,17 @@
     border-color: gray;
     text-align: center;
 }
+
+#calc-numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+
+
+#operations {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
