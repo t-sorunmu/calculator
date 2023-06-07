@@ -20,6 +20,7 @@ const divideButton = document.getElementById("divide");
 const operators = [addButton, subtractButton, multiplyButton, divideButton]
 
 const clear = document.getElementById("clear");
+const equals = document.getElementById("equals");
 
 let displayNumber = 0;
 
@@ -41,9 +42,27 @@ clear.addEventListener('click', () => {
     updateDisplay();
 });
 
-for (op of operators) {
+// Denotes which operator has been selected
+// could cause issues down the line if it's value
+// isn't set to the name of a valid operation
+let currentOperation = undefined;
+
+let operand1 = 0;
+let operand2 = 0;
+
+addButton.addEventListener('click', () => {
     operand1 = displayNumber;
-}
+    displayNumber = 0;
+    updateDisplay();
+});
+
+equals.addEventListener('click', () => {
+    operand2 = displayNumber;
+    displayNumber = add(operand1, operand2);
+    updateDisplay();
+});
+
+
 
 function updateDisplay() {
     display.innerHTML = displayNumber;
