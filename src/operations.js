@@ -51,6 +51,7 @@ let operand1 = 0;
 let operand2 = 0;
 
 addButton.addEventListener('click', () => {
+    currentOperation = "add";
     operand1 = displayNumber;
     displayNumber = 0;
     updateDisplay();
@@ -58,7 +59,9 @@ addButton.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     operand2 = displayNumber;
-    displayNumber = add(operand1, operand2);
+    if (currentOperation === "add") {
+        displayNumber = add(operand1, operand2);
+    }
     updateDisplay();
 });
 
