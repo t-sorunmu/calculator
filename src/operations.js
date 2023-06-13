@@ -7,8 +7,9 @@ const six = document.getElementById("6");
 const seven = document.getElementById("7");
 const eight = document.getElementById("8");
 const nine = document.getElementById("9");
+const zero = document.getElementById("0");
 
-const calcNumbers = [one, two, three, four, five, six, seven, eight, nine];
+const calcNumbers = [one, two, three, four, five, six, seven, eight, nine, zero];
 
 const display = document.getElementById("number-display");
 
@@ -19,19 +20,22 @@ const divideButton = document.getElementById("divide");
 
 const operators = [addButton, subtractButton, multiplyButton, divideButton]
 
+const decimal = document.getElementById("decimal");
+const negativeToggle = document.getElementById("negative-toggle");
 const clear = document.getElementById("clear");
 const equals = document.getElementById("equals");
 
 let displayNumber = 0;
 
+// TODO: See if this can be simplified with the map function
 for (num of calcNumbers) {
     // the button's IDs correlate to their numerical value
-    const value = Number.parseInt(num.id, 10);
+    const value = parseFloat(num.id, 10);
     num.addEventListener('click', function() {
         if (displayNumber === 0) {
             displayNumber = value;
         } else {
-            displayNumber = parseInt(displayNumber.toString() + value);
+            displayNumber = parseFloat(displayNumber.toString() + value);
         }
         updateDisplay();
     });
@@ -40,6 +44,14 @@ for (num of calcNumbers) {
 clear.addEventListener('click', () => {
     displayNumber = 0;
     updateDisplay();
+});
+
+decimal.addEventListener('click', () => {
+    // Prevents adding of more than one decimal point
+    if (displayNumber % 1 === 0) {
+        displayNumber = parseFloat(displayNumber.toString() + ".");
+        updateDisplay();
+    }
 });
 
 // Denotes which operator has been selected
@@ -97,7 +109,6 @@ equals.addEventListener('click', () => {
             }
             displayNumber = firstOperand / secondOperand;
     }
-
     currentOperation = undefined;
     updateDisplay();
 });
