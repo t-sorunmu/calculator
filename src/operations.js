@@ -47,42 +47,73 @@ clear.addEventListener('click', () => {
 // isn't set to the name of a valid operation
 let currentOperation = undefined;
 
-let operand1 = 0;
-let operand2 = 0;
+let firstOperand = 0;
+let secondOperand = 0;
 
 addButton.addEventListener('click', () => {
     currentOperation = "add";
-    operand1 = displayNumber;
+    firstOperand = displayNumber;
+    displayNumber = 0;
+    updateDisplay();
+});
+
+subtractButton.addEventListener('click', () => {
+    currentOperation = "subtract";
+    firstOperand = displayNumber;
+    displayNumber = 0;
+    updateDisplay();
+});
+
+multiplyButton.addEventListener('click', () => {
+    currentOperation = "multiply";
+    firstOperand = displayNumber;
+    displayNumber = 0;
+    updateDisplay();
+});
+
+divideButton.addEventListener('click', () => {
+    currentOperation = "divide";
+    firstOperand = displayNumber;
     displayNumber = 0;
     updateDisplay();
 });
 
 equals.addEventListener('click', () => {
-    operand2 = displayNumber;
+    secondOperand = displayNumber;
     if (currentOperation === "add") {
-        displayNumber = add(operand1, operand2);
+        displayNumber = firstOperand + secondOperand;
+        
     }
+    if (currentOperation === "subtract") { 
+    }
+    if (currentOperation === "multiply") {
+
+    }
+    if (currentOperation === "divide") {
+
+    }
+    switch (currentOperation) {
+        case "add":
+            displayNumber = firstOperand + secondOperand;
+            break;
+        case "subtract":
+            displayNumber = firstOperand - secondOperand;
+            break;
+        case "multiply":
+            displayNumber = firstOperand * secondOperand;
+            break;
+        case "divide":
+            if (secondOperand === 0) { 
+                alert("Error: cannot divide by zero!");
+                break; 
+            }
+            displayNumber = firstOperand / secondOperand;
+    }
+
+    currentOperation = undefined;
     updateDisplay();
 });
 
-
-
 function updateDisplay() {
     display.innerHTML = displayNumber;
-}
-
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
 }
