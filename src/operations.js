@@ -80,18 +80,6 @@ divideButton.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     secondOperand = displayNumber;
-    if (currentOperation === "add") {
-        displayNumber = firstOperand + secondOperand;
-        
-    }
-    if (currentOperation === "subtract") { 
-    }
-    if (currentOperation === "multiply") {
-
-    }
-    if (currentOperation === "divide") {
-
-    }
     switch (currentOperation) {
         case "add":
             displayNumber = firstOperand + secondOperand;
