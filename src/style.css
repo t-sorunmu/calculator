@@ -6,7 +6,7 @@
     padding: 10px;
 }
 
-#calc-numbers {
+#keypad {
     display: grid;
     margin: 5% 0%;
     grid-template-columns: repeat(3, 1fr);
