@@ -6,15 +6,26 @@
     padding: 10px;
 }
 
-#keypad {
+#buttons {
     display: grid;
-    margin: 5% 0%;
+    gap: 5px;
+    grid-row: 1 5;
+}
+
+#keypad {
+    color: inherit;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    margin: 5px;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
 }
 
 #operations {
+    grid-column-start: 3;
+    grid-column-end: 4;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
     gap: 5px;
+    margin: 5px;
 }
