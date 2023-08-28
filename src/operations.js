@@ -25,34 +25,45 @@ const negativeToggle = document.getElementById("negative-toggle");
 const clear = document.getElementById("clear");
 const equals = document.getElementById("equals");
 
-let displayNumber = 0;
+const result = {
+    value: 0,
+    isDecimal: false,
+};
 
 // TODO: See if this can be simplified with the map function
 for (num of calcNumbers) {
     // the button's IDs correlate to their numerical value
-    const value = parseFloat(num.id, 10);
+    const buttonValue = parseFloat(num.id, 10);
     num.addEventListener('click', function() {
-        if (displayNumber === 0) {
-            displayNumber = value;
+        if (result.value === 0) {
+            result.value = buttonValue;
         } else {
-            displayNumber = parseFloat(displayNumber.toString() + value);
+            result.value = parseFloat(result.value.toString() + buttonValue);
         }
         updateDisplay();
     });
 }
 
 clear.addEventListener('click', () => {
-    displayNumber = 0;
+    result.value = 0;
     updateDisplay();
 });
 
 decimal.addEventListener('click', () => {
     // Prevents adding of more than one decimal point
-    if (displayNumber % 1 === 0) {
-        displayNumber = parseFloat(displayNumber.toString() + ".");
+    if (result.isDecimal === false) {
+        result.isDecimal = true;
         updateDisplay();
     }
 });
+
+// negativeToggle.addEventListener('click', ()=> {
+//     if (result.value >= 0) {
+//         result.value = "-" + result.value.toString();
+//     } else {
+//         result.value = result.value.toString().replace('-', '');
+//     }
+// });
 
 // Denotes which operator has been selected
 // could cause issues down the line if it's value
@@ -64,55 +75,59 @@ let secondOperand = 0;
 
 addButton.addEventListener('click', () => {
     currentOperation = "add";
-    firstOperand = displayNumber;
-    displayNumber = 0;
+    firstOperand = result.value;
+    result.value = 0;
     updateDisplay();
 });
 
 subtractButton.addEventListener('click', () => {
     currentOperation = "subtract";
-    firstOperand = displayNumber;
-    displayNumber = 0;
+    firstOperand = result.value;
+    result.value = 0;
     updateDisplay();
 });
 
 multiplyButton.addEventListener('click', () => {
     currentOperation = "multiply";
-    firstOperand = displayNumber;
-    displayNumber = 0;
+    firstOperand = result.value;
+    result.value = 0;
     updateDisplay();
 });
 
 divideButton.addEventListener('click', () => {
     currentOperation = "divide";
-    firstOperand = displayNumber;
-    displayNumber = 0;
+    firstOperand = result.value;
+    result.value = 0;
     updateDisplay();
 });
 
 equals.addEventListener('click', () => {
-    secondOperand = displayNumber;
+    secondOperand = result.value;
     switch (currentOperation) {
         case "add":
-            displayNumber = firstOperand + secondOperand;
+            result.value = firstOperand + secondOperand;
             break;
         case "subtract":
-            displayNumber = firstOperand - secondOperand;
+            result.value = firstOperand - secondOperand;
             break;
         case "multiply":
-            displayNumber = firstOperand * secondOperand;
+            result.value = firstOperand * secondOperand;
             break;
         case "divide":
             if (secondOperand === 0) { 
                 alert("Error: cannot divide by zero!");
                 break; 
             }
-            displayNumber = firstOperand / secondOperand;
+            result.value = firstOperand / secondOperand;
     }
     currentOperation = undefined;
     updateDisplay();
 });
 
 function updateDisplay() {
-    display.innerHTML = displayNumber;
+    if (result.isDecimal === true && result.value % 1 === 0) {
+        display.innerHTML = result.value.toFixed(1)
+    } else {
+        display.innerHTML = result.value;
+    }
 }
