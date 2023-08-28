@@ -33,11 +33,15 @@ const result = {
 // TODO: See if this can be simplified with the map function
 for (num of calcNumbers) {
     // the button's IDs correlate to their numerical value
-    const buttonValue = parseFloat(num.id, 10);
+    const buttonValue = parseFloat(num.id);
     num.addEventListener('click', function() {
         if (result.value === 0) {
             result.value = buttonValue;
-        } else {
+        } else if (result.isDecimal === true && result.value % 1 === 0) {
+            numberDecimal = parseFloat("0." + buttonValue);
+            result.value += numberDecimal;
+        }
+        else {
             result.value = parseFloat(result.value.toString() + buttonValue);
         }
         updateDisplay();
@@ -57,13 +61,10 @@ decimal.addEventListener('click', () => {
     }
 });
 
-// negativeToggle.addEventListener('click', ()=> {
-//     if (result.value >= 0) {
-//         result.value = "-" + result.value.toString();
-//     } else {
-//         result.value = result.value.toString().replace('-', '');
-//     }
-// });
+negativeToggle.addEventListener('click', ()=> {
+    result.value *=-1;
+    updateDisplay();
+});
 
 // Denotes which operator has been selected
 // could cause issues down the line if it's value
@@ -73,31 +74,34 @@ let currentOperation = undefined;
 let firstOperand = 0;
 let secondOperand = 0;
 
+function setFirstOperand() {
+    firstOperand = result.value;
+    // Resets the result object
+    result.value = 0;
+    result.isDecimal = false;
+}
+
 addButton.addEventListener('click', () => {
     currentOperation = "add";
-    firstOperand = result.value;
-    result.value = 0;
+    setFirstOperand();
     updateDisplay();
 });
 
 subtractButton.addEventListener('click', () => {
     currentOperation = "subtract";
-    firstOperand = result.value;
-    result.value = 0;
+    setFirstOperand();
     updateDisplay();
 });
 
 multiplyButton.addEventListener('click', () => {
     currentOperation = "multiply";
-    firstOperand = result.value;
-    result.value = 0;
+    setFirstOperand();
     updateDisplay();
 });
 
 divideButton.addEventListener('click', () => {
     currentOperation = "divide";
-    firstOperand = result.value;
-    result.value = 0;
+    setFirstOperand();
     updateDisplay();
 });
 
