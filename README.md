@@ -14,5 +14,6 @@ Main application can be found [here](https://t-sorunmu.github.io/calculator/src/
 
 ## Possible Future Developments
 
+- Updating the style to make it more aesthetically pleasing
 - Adding in some scientific calculator features
 - Changing the code to adhere to more Object Oriented principles
