@@ -2,7 +2,7 @@
 
 > Just a simple calculator - nothing more nothing less
 
-Main applicaiton can be found [here](https://www.google.com)
+Main applicaiton can be found [here](https://t-sorunmu.github.io/calculator/src/index.html)
 
 ## Current Features
 
